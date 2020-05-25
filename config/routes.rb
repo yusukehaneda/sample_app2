@@ -1,11 +1,23 @@
 Rails.application.routes.draw do
-  root 'static_pages#home'
-  get  'static_pages/home'
-  # =>  StaticPages#home
-  get  'static_pages/help'
-  # => StaticPages#help
-
-  get  'static_pages/about'
-  # => StaticPages#about
   #root 'application#hello'
+  root 'static_pages#home'
+    #root_path -> '/'
+    #root_url  -> 'https://www.example.com/'
+    #get  'static_pages/home'
+    # =>  StaticPages#home
+
+  get  '/help',    to: 'static_pages#help'
+    #get  'static_pages/help'
+    # => StaticPages#help
+    #help_path -> '/help'
+    #help_url  -> 'https://www.example.com/help'
+
+  get  '/about',   to: 'static_pages#about'
+    #get  'static_pages/about'
+    # => StaticPages#about
+
+  get  '/contact', to: 'static_pages#contact'
+    #get  'static_pages/contact'
+    # => StaticPages#contact
+  get '/signup', to: 'users#new'
 end
