@@ -22,8 +22,9 @@ class UsersController < ApplicationController
     #User.create(params[:user])
     @user = User.new(user_params)
     if @user.save
-      # GET "/users/#{@user.id}"
+      log_in @user
       flash[:success] = "Welcome to the Sample App!"
+      # GET "/users/#{@user.id}"
       redirect_to @user
       # redirect_to user_path(@user) ##user_pathは/users/のこと
       # redirect_to user_path(@user.id)
