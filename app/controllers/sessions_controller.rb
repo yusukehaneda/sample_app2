@@ -12,6 +12,10 @@ class SessionsController < ApplicationController
        #nilとかfalse以外はtrueになる
        # Success #log_in(@user)
       log_in user #session[:user_id] = user.id
+
+      #ここのrememberはsessions_helperで定義したもの（app/models/user.rbで定義したものではない）
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+      
       flash.now[:success] = 'Success Log in!'   
       redirect_to user #ここのuserはuser_path(user.id)と同じ
     else
@@ -24,7 +28,7 @@ class SessionsController < ApplicationController
 
   #DELETE /logout
   def destroy
-    log_out
+    log_out if logged_in?
     redirect_to root_url #root_pathでもいい
   end
 
