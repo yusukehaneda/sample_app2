@@ -17,7 +17,8 @@ class SessionsController < ApplicationController
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       
       flash.now[:success] = 'Success Log in!'   
-      redirect_to user #ここのuserはuser_path(user.id)と同じ
+     #redirect_to user #ここのuserはuser_path(user.id)と同じ
+      redirect_back_or user # foearding urlがあればそちらに飛ばす(sessions_helperで定義)
     else
        # Failure
        # alert-danger => 赤色のフラッシュ
