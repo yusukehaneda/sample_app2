@@ -1,8 +1,11 @@
 class User < ApplicationRecord
 
-  attr_accessor :remember_token
+  attr_accessor :remember_token,:activation_token
 
-  before_save { self.email = email.downcase }
+  before_save   :downcase_email
+  before_create :create_activation_digest #saveにしてしまうと、ユーザー情報更新のときにも使われてしまう
+
+  #before_save { self.email = email.downcase }
   #右辺のselfを省略している before_save { self.email = self.email.downcase }
   validates :name,  presence: true, 
                       length: { maximum: 50 }
@@ -16,7 +19,7 @@ class User < ApplicationRecord
 
   # 渡された文字列のハッシュ値を返す(test用 リスト8.23)
   def User.digest(string)
-    #min costは簡単なハッシュ化 この?(三項演算子)はif..else..の代わりif ActiveModel.. MIN COST..else ..COSと同じ
+    #min costは簡単なハッシュ化 この?(三項演算子)はif..else..の代わりif ActiveModel.. MIN COST..else ..COSTと同じ
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
@@ -43,5 +46,19 @@ class User < ApplicationRecord
   def forget
     self.update_attribute(:remember_digest, nil)
   end
+
+  private
+
+    # メールアドレスをすべて小文字にする
+    def downcase_email
+      self.email = email.downcase
+    end
+
+    # 有効化トークンとダイジェストを作成および代入する
+    def create_activation_digest
+      self.activation_token  = User.new_token
+      self.activation_digest = User.digest(activation_token)
+    end
+
 
 end
