@@ -1,6 +1,8 @@
 class User < ApplicationRecord
 
-  attr_accessor :remember_token,:activation_token
+  attr_accessor :remember_token,
+                :activation_token, 
+                :reset_token
 
   before_save   :downcase_email
   before_create :create_activation_digest #saveにしてしまうと、ユーザー情報更新のときにも使われてしまう
@@ -57,6 +59,26 @@ class User < ApplicationRecord
   # 有効化用のメールを送信する
   def send_activation_email
     UserMailer.account_activation(self).deliver_now
+  end
+
+  # パスワード再設定の属性を設定する
+  def create_reset_digest
+    self.reset_token = User.new_token
+    update_attribute(:reset_digest,  User.digest(reset_token))
+    update_attribute(:reset_sent_at, Time.zone.now)
+  end
+
+  # パスワード再設定のメールを送信する
+  def send_password_reset_email
+    # self => #<User:0x00007f376f3cf5c0>
+    UserMailer.password_reset(self).deliver_now
+  end
+
+  # パスワード再設定の期限が切れている場合はtrueを返す
+  # 3.hours.ago < 2.hours.ago 3時間前は有効期限切れ
+  #パスワード再設定メールの送信時刻が、現在時刻より2時間以上前（早い）の場合
+  def password_reset_expired?
+    self.reset_sent_at < 2.hours.ago
   end
 
   private

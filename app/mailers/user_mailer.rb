@@ -9,9 +9,11 @@ class UserMailer < ApplicationMailer
     #   example: mail.deliver
   end
 
-  def password_reset
-    @greeting = "Hi"
-
-    mail to: "to@example.org"
+  # @user.send_reset_email
+  # self = @user
+  # UserMailer.password_reset(self).deliver_now
+  def password_reset(user)
+    @user = user
+    mail to: user.email, subject: "Password reset"
   end
 end
