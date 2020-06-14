@@ -14,6 +14,7 @@ class UsersController < ApplicationController
     #@がつくとインスタンス変数（ビューにも渡せる） @@はglobal変数
     #@user = User.first
     @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
     #debugger
   end
 
@@ -82,14 +83,6 @@ class UsersController < ApplicationController
 
     # beforeアクション
 
-    # ログイン済みユーザーかどうか確認
-    def logged_in_user
-      unless logged_in?
-        store_location # どこにアクセスしたかったのかを覚えておく
-        flash[:danger] = "Please log in."
-        redirect_to login_url
-      end
-    end
 
     # 正しいユーザーかどうか確認
     # current_userはログインしていないと呼び出せない
