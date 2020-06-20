@@ -1,0 +1,5 @@
+ja:
+  users:
+    # app/views/users/new.html.erb
+    new:
+      Create my account: 'アカウントを作成'

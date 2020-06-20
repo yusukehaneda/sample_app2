@@ -1,0 +1,13 @@
+ja:
+  sessions:
+    create:
+      not activated:        'アカウントが有効化されていません。 '
+      check email:          'アカウント有効化に関するメールを確認してください。'
+      invalid combination:  'メールアドレスとパスワードの組み合わせが間違っています。'
+
+en:
+  sessions:
+    create:
+      not activated:        'Account not activated. '
+      check email:          'Check your email for the activation link.'
+      invalid combination:  'Invalid email/password combination.'

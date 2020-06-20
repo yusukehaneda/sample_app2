@@ -1,0 +1,13 @@
+ja:
+  shared:
+    error_messages:
+      errors count: '%{errors_count}個のエラーがあります。'
+    micropost_form:
+      post: '投稿'
+
+en:
+  shared:
+    error_messages:
+      errors count: 'The form contains %{errors_count} errors.'
+    micropost_form:
+      post: 'Post'

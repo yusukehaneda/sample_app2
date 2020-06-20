@@ -19,5 +19,16 @@ module SampleApp2
     # 認証トークンをremoteフォームに埋め込む
     config.action_view.embed_authenticity_token_in_remote_forms = true
 
+    # i18n対応
+    # デフォルトのlocaleを日本語(:ja)にする
+    config.i18n.default_locale = :ja
+
+    config.time_zone = 'Tokyo'
+    config.active_record.default_timezone = :local
+
+
+    # 複数のロケールが読み込まれるようにする
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
+    #config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
   end
 end

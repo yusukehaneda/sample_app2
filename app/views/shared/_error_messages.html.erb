@@ -1,13 +1,12 @@
 <% if object.errors.any? %>
   <div id="error_explanation">
     <div class="alert alert-danger">
-      The form contains <%= pluralize(object.errors.count, "error") %>.
+        <%= t('.errors count', errors_count: object.errors.count) %>
     </div>
     <ul>
-    <!--errors.full_messages = [Email has already been taken", "Password confirmation doesn't match Password"] -->
-    <% object.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
+      <% object.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
     </ul>
   </div>
 <% end %>

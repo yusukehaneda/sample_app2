@@ -1,0 +1,19 @@
+ja:
+  sessions:
+    # app/views/sessions/new.html.erb
+    new:
+      email: 'メールアドレス'
+      password: 'パスワード'
+      forgot password: 'パスワードを忘れた場合'
+      remember me: 'ログインしたままにする'
+      log in: 'ログイン'
+
+en:
+  sessions:
+    # app/views/sessions/new.html.erb
+    new:
+      email: 'Email'
+      password: 'Password'
+      forgot password: 'forgot password'
+      remember me: 'Remember me on this computer'
+      log in: 'Log in'
