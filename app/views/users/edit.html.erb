@@ -4,6 +4,22 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <%= form_with(model: @user, local: true) do |f| %>
+    <div class="gravatar_edit">
+
+    <% if @user.avatar.attached? %>
+      <%= image_tag @user.display_avatar %>
+    <% else %>
+      <%= gravatar_for @user %>
+    <% end %>
+
+
+      <p>If you want to change profile image, you can change here or <a href="https://gravatar.com/emails" target="_blank">gravatar.com.</a></p>
+      <span class="image">
+        <%= f.file_field :avatar , accept: "image/jpeg,image/gif,image/png" %>
+        <p><%= f.check_box :remove_img ,avatar.id %>画像を削除する</p>
+      </span>
+    </div>
+
       <%= render 'shared/error_messages', object: f.object %>
 
       <%= f.label :name %>
@@ -11,6 +27,9 @@
 
       <%= f.label :email %>
       <%= f.email_field :email, class: 'form-control' %>
+
+      <%= f.label :self_introduction %>
+      <%= f.text_area :self_introduction, placeholder: "Compose self_introduction...", class: 'form-control' %>
 
       <%= f.label :password %>
       <%= f.password_field :password, class: 'form-control' %>
@@ -21,10 +40,6 @@
       <%= f.submit "Save changes", class: "btn btn-primary" %>
     <% end %>
 
-    <div class="gravatar_edit">
-      <%= gravatar_for @user %>
-      <p>If you want to change profile image, you can change it in <a href="https://gravatar.com/emails" target="_blank">gravatar.com.</a></p>
-    </div>
   </div>
 </div>
 

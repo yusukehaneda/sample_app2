@@ -61,8 +61,14 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
+      @user.avatar.purge if @user.avatar.attached?
+      @user.avatar.attach(params[:user][:avatar])
+
+      remove_avatar = @user.avatar.find(params[:user][:remove_img])
+      remove_avatar.purge
+
       flash[:success] = "Profile updated"
-      redirect_to @user    
+      redirect_to @user
     else
        # user.errors <=ここにデータが入っている
       render 'edit'  
@@ -92,11 +98,12 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
+
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation)
+      params.require(:user).permit(:name, :email, :self_introduction, :password,
+                                   :password_confirmation,:avatar,:remove_img)
     end
 
     # beforeアクション

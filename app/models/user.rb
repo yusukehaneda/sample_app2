@@ -34,8 +34,15 @@ class User < ApplicationRecord
                       length: { maximum: 255 },
                       format: { with: VALID_EMAIL_REGEX },
                       uniqueness: true
+
+  validates :self_introduction,  presence: true, length: { maximum: 100 }
+
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+
+  has_one_attached :avatar
+
+
 
   # 渡された文字列のハッシュ値を返す(test用 リスト8.23)
   def User.digest(string)
@@ -126,6 +133,12 @@ class User < ApplicationRecord
   def following?(other_user)
     following.include?(other_user)
   end
+
+  # 表示用のリサイズ済み画像を返す
+  def display_avatar
+    avatar.variant(resize_to_limit: [80, 80])
+  end
+
 
   private
 

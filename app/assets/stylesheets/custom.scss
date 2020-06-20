@@ -188,6 +188,17 @@ aside {
   padding: 0;
 }
 
+
+.user_self_introduction {
+  overflow: auto;
+  margin-top: 0;
+  padding: 5 px;
+  p {
+    color: gray;  
+  }
+}
+
+
 /* forms */
 
 input, textarea, select, .uneditable-input {

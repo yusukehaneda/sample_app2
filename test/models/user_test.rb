@@ -6,6 +6,7 @@ class UserTest < ActiveSupport::TestCase
   def setup
     @user = User.new(name: "Example User", 
                     email: "user@example.com",
+        self_introduction: "I am test user",
                  password: "foobar", 
                  password_confirmation: "foobar")
   end
@@ -78,6 +79,20 @@ class UserTest < ActiveSupport::TestCase
   test "authenticated? should return false for a user with nil digest" do
     assert_not @user.authenticated?(:remember, '')
   end
+
+
+  #自己紹介が100文字なら通す
+  test "invalid self-introduction under 100" do
+    @user.self_introduction = @user.self_introduction = "a" * 100
+    assert @user.valid?
+  end
+
+  #自己紹介が101文字なら通さない
+  test "invalid self-introduction over 100" do
+    @user.self_introduction = @user.self_introduction = "a" * 101
+    assert_not @user.valid?
+  end
+
 
   # userが削除されたらmicropostも削除されるはず
   test "associated microposts should be destroyed" do
