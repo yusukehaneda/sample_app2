@@ -15,7 +15,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
                                          password_confirmation: "bar" } }
     end
     assert_template 'users/new'
-    assert_select 'div#error_explanation'
+    assert_select 'div.alert-danger','4個のエラーがあります。'
     assert_select 'div.field_with_errors'
   end
 
@@ -28,7 +28,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
                                          password_confirmation: "password" } }
     end
     assert_equal 1, ActionMailer::Base.deliveries.size
-    
+
     # users_controllerの@user = User.new(user_params)にアクセスできる
     user = assigns(:user)
     #puts '*********user********'

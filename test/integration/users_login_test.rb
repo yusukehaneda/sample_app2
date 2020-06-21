@@ -6,6 +6,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     @user = users(:michael)
   end
 
+  #誤っているデータ ログインできないはず
   test "login with valid email/invalid password" do
     get login_path
     assert_template 'sessions/new'
@@ -14,6 +15,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_not is_logged_in?
     assert_template 'sessions/new'
     assert_not flash.empty?
+    assert_select 'div.alert-danger','メールアドレスとパスワードの組み合わせが間違っています。'
     get root_path
     assert flash.empty?
   end

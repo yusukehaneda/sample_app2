@@ -1,0 +1,11 @@
+ja:
+  account_activations:
+    edit:
+      activated:        'アカウントが有効化されました'
+      invalid activation link:       'アカウント有効化用のリンクが誤っています'
+
+en:
+  sessions:
+    edit:
+      activated:        'Account activated!'
+      invalid activation link:          'Invalid activation link'
