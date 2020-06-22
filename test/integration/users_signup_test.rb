@@ -29,6 +29,8 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     end
     assert_equal 1, ActionMailer::Base.deliveries.size
 
+
+    assert_equal flash[:info],'アカウント有効化に関するメールを確認してください。'
     # users_controllerの@user = User.new(user_params)にアクセスできる
     user = assigns(:user)
     #puts '*********user********'

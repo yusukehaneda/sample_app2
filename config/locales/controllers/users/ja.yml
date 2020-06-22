@@ -1,0 +1,23 @@
+ja:
+  users:
+    create:
+      check email:          'アカウント有効化に関するメールを確認してください。'
+    edit:
+      please log in:          'ログインしてください。'
+    update:
+      profile updated:       'プロフィールが更新されました。'
+      please log in:          'ログインしてください。'
+    destroy:
+      user deleted:          'ユーザーが削除されました。'
+
+en:
+  users:
+    create:
+      check email:           'Please check your email to activate your account.'
+    edit:
+      please log in:          'Please log in.'
+    update:
+      profile updated:       'Profile updated'
+      please log in:          'Please log in.'
+    destroy:
+      user deleted:          'User deleted'

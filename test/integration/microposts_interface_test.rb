@@ -22,15 +22,19 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
     content = "This micropost really ties the room together"
     assert_difference 'Micropost.count', 1 do
       post microposts_path, params: { micropost: { content: content } }
+      assert_equal flash[:success] ,'投稿しました！'
     end
     assert_redirected_to root_url
     follow_redirect!
     assert_match content, response.body
+
     # 投稿を削除する
+
     assert_select 'a', text: 'delete'
     first_micropost = @user.microposts.paginate(page: 1).first
     assert_difference 'Micropost.count', -1 do
       delete micropost_path(first_micropost)
+      assert_equal flash[:success] ,'投稿が削除されました。'
     end
     # 違うユーザーのプロフィールにアクセス（削除リンクがないことを確認）
     get user_path(users(:archer))

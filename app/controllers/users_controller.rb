@@ -7,12 +7,12 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.paginate(page: params[:page])  
+    @users = User.paginate(page: params[:page])
   end
 
-  # GET /users/:id  
+  # GET /users/:id
   def show
-    # user = User.first ローカル変数(このアクションでしか使えない。ビューには使えない) 
+    # user = User.first ローカル変数(このアクションでしか使えない。ビューには使えない)
     #@がつくとインスタンス変数（ビューにも渡せる） @@はglobal変数
     #@user = User.first
     @user = User.find(params[:id])
@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     if @user.save
       #UserMailer.account_activation(@user).deliver_now
       @user.send_activation_email
-      flash[:info] = "Please check your email to activate your account."
+      flash[:info] = t('.check email')
       redirect_to root_url
       #log_in @user
       #flash[:success] = "Welcome to the Sample App!"
@@ -61,18 +61,18 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      flash[:success] = "Profile updated"
-      redirect_to @user    
+      flash[:success] = t('.profile updated')
+      redirect_to @user
     else
        # user.errors <=ここにデータが入っている
-      render 'edit'  
+      render 'edit'
     end
   end
 
-  # DELETE /users/:id 
+  # DELETE /users/:id
   def destroy
     User.find(params[:id]).destroy
-    flash[:success] = "User deleted"
+    flash[:success] = t('.user deleted')
     redirect_to users_url
   end
 

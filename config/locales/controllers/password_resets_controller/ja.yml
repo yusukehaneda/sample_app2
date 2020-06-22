@@ -1,0 +1,15 @@
+ja:
+  password_resets:
+    create:
+      sent email:        'パスワード再設定用のメールを送信しました。'
+      cannot sent email: '有効なメールアドレスが見つかりません。'
+    update:
+      password reset success:   'パスワードが更新されました。'
+
+en:
+  password_resets:
+    create:
+      sent email:        'Email sent with password reset instructions'
+      cannot sent email: 'Email address not found'
+    update:
+      password reset success:   'Password has been reset.'

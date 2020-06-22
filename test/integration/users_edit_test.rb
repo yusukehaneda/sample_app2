@@ -29,6 +29,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
                                               password:              "",
                                               password_confirmation: "" } }
     assert_not flash.empty?
+    assert_equal flash[:success] ,'プロフィールが更新されました。'
     assert_redirected_to @user
     @user.reload
     assert_equal name,  @user.name

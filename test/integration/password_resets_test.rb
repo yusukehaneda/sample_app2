@@ -14,14 +14,20 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
     # メールアドレスが無効
     post password_resets_path, params: { password_reset: { email: "" } }
     assert_not flash.empty?
+    assert_select 'div.alert-danger','有効なメールアドレスが見つかりません。'
     assert_template 'password_resets/new'
     # メールアドレスが有効
     post password_resets_path,
          params: { password_reset: { email: @user.email } }
     assert_not_equal @user.reset_digest, @user.reload.reset_digest
     assert_equal 1, ActionMailer::Base.deliveries.size
+
     assert_not flash.empty?
+    assert_equal flash[:info],'パスワード再設定用のメールを送信しました。'
+
     assert_redirected_to root_url
+
+
     # パスワード再設定フォームのテスト
     user = assigns(:user)
     # メールアドレスが無効
@@ -35,6 +41,7 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
     # メールアドレスが有効で、トークンが無効
     get edit_password_reset_path('wrong token', email: user.email)
     assert_redirected_to root_url
+
     # メールアドレスもトークンも有効
     get edit_password_reset_path(user.reset_token, email: user.email)
     assert_template 'password_resets/edit'
@@ -58,6 +65,8 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
                             password_confirmation: "foobaz" } }
     assert is_logged_in?
     assert_not flash.empty?
+
+    assert_equal flash[:success],'パスワードが更新されました。'
     assert_redirected_to user
   end
 end

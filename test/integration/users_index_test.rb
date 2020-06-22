@@ -22,6 +22,7 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     end
     assert_difference 'User.count', -1 do
       delete user_path(@non_admin)
+      assert_equal flash[:success],'ユーザーが削除されました。' 
     end
   end
 
