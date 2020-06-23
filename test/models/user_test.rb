@@ -4,9 +4,9 @@ class UserTest < ActiveSupport::TestCase
 
  #テストの最初に必ず実行するのがsetup
   def setup
-    @user = User.new(name: "Example User", 
+    @user = User.new(name: "Example User",
                     email: "user@example.com",
-                 password: "foobar", 
+                 password: "foobar",
                  password_confirmation: "foobar")
   end
 
@@ -114,6 +114,23 @@ class UserTest < ActiveSupport::TestCase
     # フォローしていないユーザーの投稿を確認
     archer.microposts.each do |post_unfollowed|
       assert_not michael.feed.include?(post_unfollowed)
+    end
+  end
+
+  #ユーザー検索でヒットしないパターン
+  test "User search unhit" do
+    keyword = ''
+    search_result = User.search(keyword)
+    assert_equal search_result,nil
+  end
+
+  #ユーザー検索でヒットするパターン
+  test "User search hit" do
+    keyword = 'michael'
+    search_result = User.search(keyword)
+    #検索結果の名前が'Michael Example'と一致していればOK
+    search_result.each do |s|
+      assert_equal 'Michael Example',s.name
     end
   end
 

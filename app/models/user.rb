@@ -14,12 +14,12 @@ class User < ApplicationRecord
   has_many :following,                through: :active_relationships,
                                        source: :followed
 
-  has_many :followers,                through: :passive_relationships, 
+  has_many :followers,                through: :passive_relationships,
                                        source: :follower
 
 
   attr_accessor :remember_token,
-                :activation_token, 
+                :activation_token,
                 :reset_token
 
   before_save   :downcase_email
@@ -27,10 +27,10 @@ class User < ApplicationRecord
 
   #before_save { self.email = email.downcase }
   #右辺のselfを省略している before_save { self.email = self.email.downcase }
-  validates :name,  presence: true, 
+  validates :name,  presence: true,
                       length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, 
+  validates :email, presence: true,
                       length: { maximum: 255 },
                       format: { with: VALID_EMAIL_REGEX },
                       uniqueness: true
@@ -126,6 +126,15 @@ class User < ApplicationRecord
   def following?(other_user)
     following.include?(other_user)
   end
+
+  def self.search(keyword)
+    if keyword.size > 0
+      User.where(['name LIKE ?', "%#{keyword}%"])
+    else
+      return nil
+    end
+  end
+
 
   private
 
