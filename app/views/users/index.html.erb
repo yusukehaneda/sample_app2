@@ -1,11 +1,18 @@
 <% provide(:title, 'All users') %>
 <h1>All users</h1>
+<!--  search  -->
+<div class="">
+  <%= form_with( url: users_path, method: :get, local: true) do |f|%>
+      <%= f.text_field :users_keyword , class: 'form-control',placeholder: "検索したいユーザー名の一部もしくは全部を入力してください" %>
+      <%= f.submit '検索', :name => nil , class: "btn btn-primary" %>
+  <% end %>
+</div>
 
 <%= will_paginate %>
+
 
 <ul class="users">
   <%= render @users %>
 </ul>
 
 <%= will_paginate %>
-

@@ -7,12 +7,13 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    search_result = User.search(params[:search])
-    if search_result
-      @user = search_result.paginate(page: params[:page])
+    search_result = User.search(params[:users_keyword])
+
+    if search_result && !search_result.empty?
+      @users = search_result.paginate(page: params[:page])
     else
       @users = User.paginate(page: params[:page])
-      flash[:info] = '検索条件にヒットしませんでした。'
+      flash.now[:info] = '検索条件にヒットしませんでした。'
     end
   end
 

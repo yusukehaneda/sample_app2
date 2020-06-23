@@ -128,7 +128,7 @@ class User < ApplicationRecord
   end
 
   def self.search(keyword)
-    if keyword.size > 0
+    if keyword.nil? || keyword.size > 0 
       User.where(['name LIKE ?', "%#{keyword}%"])
     else
       return nil
