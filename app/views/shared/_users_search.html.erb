@@ -1,7 +1,0 @@
-<!--  search  -->
-<div class="users_search">
-  <%= form_with( url: users_path, method: :get, local: true) do |f|%>
-      <%= f.text_field :users_keyword , class: 'form-control',placeholder: t('.users_search placeholder') %>
-      <%= f.submit t('.search'), :name => nil , class: "btn btn-primary" %>
-  <% end %>
-</div>

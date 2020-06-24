@@ -23,10 +23,10 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
   #検索機能のテスト
   test "micropost search result" do
 
-    #get user_path(@user), params: { microposts_keyword: "cats"}
-    #assert_match micropost.content
+    #get user_path(@user), params: { keyword: "cats"}
+    #assert_match microposts.content
     # microposts search (no result)
-    get user_path(@user), params: { microposts_keyword: "abcdefghijk"}
+    get user_path(@user), params: { keyword: "abcdefghijk"}
     assert_equal "検索条件にヒットしませんでした。",flash[:info]
   end
 

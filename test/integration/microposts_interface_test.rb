@@ -40,4 +40,15 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
     get user_path(users(:archer))
     assert_select 'a', text: 'delete', count: 0
   end
+
+  #検索機能のテスト
+  test "micropost search result home" do
+    log_in_as(@user)
+    get root_path
+    #get user_path(@user), params: { microposts_keyword: "cats"}
+    #assert_match micropost.content
+    # microposts search (no result)
+    get root_path(@user), params: { keyword: "abcdefghijk"}
+    assert_equal "検索条件にヒットしませんでした。",flash[:info]
+  end
 end

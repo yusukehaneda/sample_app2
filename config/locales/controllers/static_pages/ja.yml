@@ -1,0 +1,11 @@
+ja:
+  static_pages:
+    home:
+      not hit search:       '検索条件にヒットしませんでした。'
+      search result count:  '%{search_result_count}件ヒットしました。'
+
+en:
+  static_pages:
+    home:
+      not hit search:       'Could not be found!'
+      search result count:  '%{search_result_count} hit!'

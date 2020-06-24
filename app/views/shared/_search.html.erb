@@ -1,0 +1,7 @@
+<!--  search  -->
+<div class="search">
+  <%= form_with( url: yield(:path), method: :get, local: true) do |f|%>
+      <%= f.text_field :keyword , class: 'form-control',placeholder: t('.search placeholder') %>
+      <%= f.submit t('.search'), :name => nil , class: "btn btn-primary" %>
+  <% end %>
+</div>

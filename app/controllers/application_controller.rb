@@ -11,4 +11,8 @@ class ApplicationController < ActionController::Base
         redirect_to login_url
       end
     end
+
+    def count_flash(search_result)
+      flash.now[:success] = t('.search result count',search_result_count: search_result.count)
+    end
 end

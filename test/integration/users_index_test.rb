@@ -38,7 +38,7 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
 
     # search users
     get users_path
-    #get users_path, params: { users_keyword:  "i"}
+    #get users_path, params: { keyword:  "i"}
     #puts '*****43***'
     #puts @search_result
 
@@ -48,7 +48,7 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     #end
 
     # User search (no result)
-    get users_path, params: { users_keyword: "abcdefghijk"}
+    get users_path, params: { keyword: "abcdefghijk"}
     assert_equal "検索条件にヒットしませんでした。",flash[:info]
   end
 end

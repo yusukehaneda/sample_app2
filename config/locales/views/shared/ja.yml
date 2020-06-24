@@ -4,12 +4,10 @@ ja:
       errors count:                   '%{errors_count}個のエラーがあります。'
     micropost_form:
       post:                           '投稿'
-    microposts_search:
-      microposts_search placeholder:  '検索したい投稿の一部を入力してください'
+    search:
+      search placeholder:             '検索したい文字を入力してください'
       search:                         '検索'
-    users_search:
-      users_search placeholder:       '検索したいユーザー名の一部もしくは全部を入力してください'
-      search:                         '検索'
+
 
 en:
   shared:
@@ -17,9 +15,6 @@ en:
       errors count:                   'The form contains %{errors_count} errors.'
     micropost_form:
       post:                           'Post'
-    microposts_search:
-      microposts_search placeholder:  'input micropost search keyword'
-      search:                         'Search'
-    users_search:
-      users_search placeholder:       'input user search keyword'
+    search:
+      search placeholder:             'Please input micropost search keyword'
       search:                         'Search'
