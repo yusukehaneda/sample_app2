@@ -7,13 +7,16 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    search_result = User.search(params[:users_keyword])
+    #
+    search_result = User.search(params[:users_keyword]) if params[:users_keyword]
 
     if search_result && !search_result.empty?
       @users = search_result.paginate(page: params[:page])
+      @highlight_keyword = params[:users_keyword]
+      count_flash(search_result)
     else
       @users = User.paginate(page: params[:page])
-      flash.now[:info] = t('.not hit search')
+      flash.now[:info] = t('.not hit search') if params[:users_keyword]
     end
   end
 
@@ -25,13 +28,15 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     # 検索機能追加
-    search_result = @user.microposts.search(params[:microposts_keyword])
+    search_result = @user.microposts.search(params[:microposts_keyword]) if params[:microposts_keyword]
 
     if search_result && !search_result.empty?
       @microposts = search_result.paginate(page: params[:page])
+      @highlight_keyword = params[:microposts_keyword]
+      count_flash(search_result)
     else
       @microposts = @user.microposts.paginate(page: params[:page])
-      flash.now[:info] = t('.not hit search')
+      flash.now[:info] = t('.not hit search') if params[:microposts_keyword]
     end
     #@microposts = @user.microposts.paginate(page: params[:page])
     #debugger
@@ -131,4 +136,7 @@ class UsersController < ApplicationController
       redirect_to(root_url) unless current_user.admin?
     end
 
+    def count_flash(search_result)
+      flash.now[:success] = t('.search result count',search_result_count: search_result.count)
+    end
 end

@@ -2,8 +2,10 @@ ja:
   users:
     index:
       not hit search:       '検索条件にヒットしませんでした。'
+      search result count:  '%{search_result_count}件ヒットしました。'
     show:
       not hit search:       '検索条件にヒットしませんでした。'
+      search result count:  '%{search_result_count}件ヒットしました。'
     create:
       check email:          'アカウント有効化に関するメールを確認してください。'
     edit:
@@ -18,8 +20,10 @@ en:
   users:
     index:
       not hit search:       'Could not be found!'
+      search result count:  '%{search_result_count} hit!'
     show:
       not hit search:       'Could not be found!'
+      search result count:  '%{search_result_count} hit!'
     create:
       check email:          'Please check your email to activate your account.'
     edit:
