@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       @users = search_result.paginate(page: params[:page])
     else
       @users = User.paginate(page: params[:page])
-      flash.now[:info] = '検索条件にヒットしませんでした。'
+      flash.now[:info] = t('.not hit search')
     end
   end
 
@@ -23,7 +23,17 @@ class UsersController < ApplicationController
     #@がつくとインスタンス変数（ビューにも渡せる） @@はglobal変数
     #@user = User.first
     @user = User.find(params[:id])
-    @microposts = @user.microposts.paginate(page: params[:page])
+
+    # 検索機能追加
+    search_result = @user.microposts.search(params[:microposts_keyword])
+
+    if search_result && !search_result.empty?
+      @microposts = search_result.paginate(page: params[:page])
+    else
+      @microposts = @user.microposts.paginate(page: params[:page])
+      flash.now[:info] = t('.not hit search')
+    end
+    #@microposts = @user.microposts.paginate(page: params[:page])
     #debugger
   end
 

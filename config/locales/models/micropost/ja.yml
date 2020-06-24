@@ -2,14 +2,14 @@ ja:
   activerecord:
     models:
       # view側： User.model_name.human => "ユーザ" / t("activerecord.models.user")と同じ
-      micropost: '投稿'
+      micropost:          '投稿'
     attributes:
         micropost:
-          content:      '投稿内容'
-          image:        '画像'
+          content:        '投稿内容'
+          image:          '画像'
           invalid format: 'jpeg,gif,png以外のフォーマットは使用できません'
-          invalid size: '1MB以上の画像は投稿できません'
+          invalid size:   '1MB以上の画像は投稿できません'
 
   errors:
     messages:
-      less_than_xmb: は1MBより小さいファイルをアップロードしてください
+      less_than_xmb:      'は1MBより小さいファイルをアップロードしてください'

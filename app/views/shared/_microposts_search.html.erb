@@ -1,0 +1,7 @@
+<!--  search  -->
+<div class="microposts_search">
+  <%= form_with( url: user_path, method: :get, local: true) do |f|%>
+      <%= f.text_field :microposts_keyword , class: 'form-control',placeholder: t('.microposts_search placeholder') %>
+      <%= f.submit t('.search'), :name => nil , class: "btn btn-primary" %>
+  <% end %>
+</div>

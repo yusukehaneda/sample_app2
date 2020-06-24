@@ -22,7 +22,7 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     end
     assert_difference 'User.count', -1 do
       delete user_path(@non_admin)
-      assert_equal flash[:success],'ユーザーが削除されました。'
+      assert_equal 'ユーザーが削除されました。',flash[:success]
     end
   end
 
@@ -35,6 +35,17 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
 
   test "user search result" do
     log_in_as(@admin)
+
+    # search users
+    get users_path
+    #get users_path, params: { users_keyword:  "i"}
+    #puts '*****43***'
+    #puts @search_result
+
+    #first_page_of_users = User.paginate(page: 1)
+    #@users.each do |user|
+    #  assert_select 'a[href=?]', user_path(user), text: user.name
+    #end
 
     # User search (no result)
     get users_path, params: { users_keyword: "abcdefghijk"}

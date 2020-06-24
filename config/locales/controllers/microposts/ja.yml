@@ -1,13 +1,13 @@
 ja:
   microposts:
     create:
-      micropost created:          '投稿しました！'
+      micropost created:           '投稿しました！'
     destroy:
-      micropost deleted:          '投稿が削除されました。'
+      micropost deleted:           '投稿が削除されました。'
 
 en:
   microposts:
     create:
       micropost created:           'Micropost created!'
     destroy:
-      micropost deleted:          'Micropost deleted'
+      micropost deleted:           'Micropost deleted'

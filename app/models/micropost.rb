@@ -14,4 +14,13 @@ class Micropost < ApplicationRecord
     image.variant(resize_to_limit: [500, 500])
   end
 
+  # 検索機能
+  def self.search(keyword)
+    if keyword.nil? || keyword.size > 0
+      Micropost.where(['content LIKE ?', "%#{keyword}%"])
+    else
+      return nil
+    end
+  end
+
 end

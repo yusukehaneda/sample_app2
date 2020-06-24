@@ -127,8 +127,9 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
+  # 検索機能
   def self.search(keyword)
-    if keyword.nil? || keyword.size > 0 
+    if keyword.nil? || keyword.size > 0
       User.where(['name LIKE ?', "%#{keyword}%"])
     else
       return nil

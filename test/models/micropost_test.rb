@@ -32,4 +32,21 @@ class MicropostTest < ActiveSupport::TestCase
     assert_equal microposts(:most_recent), Micropost.first
   end
 
+  #マイクロポスト検索でヒットしないパターン
+  test "Microposts search unhit" do
+    keyword = ''
+    search_result = Micropost.search(keyword)
+    assert_equal search_result,nil
+  end
+
+  #マイクロポスト検索でヒットするパターン
+  test "Microposts search hit" do
+    keyword = 'orange'
+    search_result = Micropost.search(keyword)
+    #検索結果の内容が'I just ate an orange!'と一致していればOK
+    search_result.each do |s|
+      assert_equal 'I just ate an orange!',s.content
+    end
+  end
+
 end

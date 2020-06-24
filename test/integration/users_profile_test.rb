@@ -19,4 +19,15 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
       assert_match micropost.content, response.body
     end
   end
+
+  #検索機能のテスト
+  test "micropost search result" do
+
+    #get user_path(@user), params: { microposts_keyword: "cats"}
+    #assert_match micropost.content
+    # microposts search (no result)
+    get user_path(@user), params: { microposts_keyword: "abcdefghijk"}
+    assert_equal "検索条件にヒットしませんでした。",flash[:info]
+  end
+
 end

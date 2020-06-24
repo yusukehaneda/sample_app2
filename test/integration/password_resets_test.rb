@@ -23,7 +23,7 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
     assert_equal 1, ActionMailer::Base.deliveries.size
 
     assert_not flash.empty?
-    assert_equal flash[:info],'パスワード再設定用のメールを送信しました。'
+    assert_equal 'パスワード再設定用のメールを送信しました。',flash[:info]
 
     assert_redirected_to root_url
 
@@ -66,7 +66,7 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
     assert is_logged_in?
     assert_not flash.empty?
 
-    assert_equal flash[:success],'パスワードが更新されました。'
+    assert_equal 'パスワードが更新されました。',flash[:success]
     assert_redirected_to user
   end
 end
