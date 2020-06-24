@@ -36,16 +36,8 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
   test "user search result" do
     log_in_as(@admin)
 
-    # search users
-    get users_path
-    get users_path, params: { search: { users_keyword:  "Example"} }
-    first_page_of_users = User.paginate(page: 1)
-    first_page_of_users.each do |user|
-      assert_select 'a[href=?]', user_path(user), text: user.name
-    end
-
     # User search (no result)
-    get users_path, params: {search: { users_keyword: "abcdefghijk"}}
-      assert_equal flash[:info],"検索条件にヒットしませんでした。"
+    get users_path, params: { users_keyword: "abcdefghijk"}
+    assert_equal "検索条件にヒットしませんでした。",flash[:info]
   end
 end
